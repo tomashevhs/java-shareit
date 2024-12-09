@@ -8,10 +8,7 @@ import ru.practicum.shareit.item.mapper.ItemMapper;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.validation.NotFoundException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -36,15 +33,15 @@ public class ItemStorageImpl implements ItemStorage {
     public ItemDto updateItem(ItemDto newItemDto, long userId, long itemId) {
         Item item = itemIdKey.get(itemId);
 
-        if (newItemDto.getName() != null && !newItemDto.getName().isBlank()) {
+        if (Objects.nonNull(newItemDto.getName()) && !newItemDto.getName().isBlank()) {
             item.setName(newItemDto.getName());
             log.debug("Присвоение нового имени вещи");
         }
-        if (newItemDto.getDescription() != null && !newItemDto.getDescription().isBlank()) {
+        if (Objects.nonNull(newItemDto.getDescription()) && !newItemDto.getDescription().isBlank()) {
             item.setDescription(newItemDto.getDescription());
             log.debug("Присвоение нового описания вещи");
         }
-        if (newItemDto.getAvailable() != null) {
+        if (Objects.nonNull(newItemDto.getAvailable())) {
             item.setAvailable(newItemDto.getAvailable());
             log.debug("Присвоение нового статуса бронирования вещи");
         }
